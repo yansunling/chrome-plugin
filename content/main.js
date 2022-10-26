@@ -28,7 +28,6 @@ window.onload=function () {
 
     setTimeout(function () {
         let url=window.location.href;
-        console.log(url);
         if(url.indexOf("https://k8s.test.tuolong56.com/#/login")>=0){
             let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6InVzUTRIV0txbEpZSVlORU9xY04zU1YwZTIyQTIzWnY2SVpmbXNmc1JSZE0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLXJ3anhtIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwNDNmZThkYS0wNzcwLTRjOWMtODRiZC0xZGEyNDY3ZDQzZDEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.akjJk1XCi9V__Gn_VnVX9lyrFIaWoPiW-PjmDa10Te8YgVmiJR3OeKDV0SHSBx7xnjdqTySL1IXKaQAZLmI3Nt4gtxaOBpr96cU6mCX7i7tIcbnEe-ZcnNJYO1sMOnUPvJ6YKZ6x4IwndZ9ehUbroVgnVBAipZ_fpWbnZ0l1AxcTUpXvfwAVB1e1Ud15k9y0Pm9Fkiz9AUQTq6KBOmzx0Kb_mJsOx2LvNZuhQqSIL3_7zBwNo3ALlPYCen77-oJJFrJ2FrjDQ70Ue4kvi3g-qNMeT0sEgKgTCK_MBnyHdT-5h0lDmK6J6043E3x0qgIx7Zy2XFw-_jdqdOeRtY3mvQ";
             setPassword(passWord);
