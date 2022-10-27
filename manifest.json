@@ -29,7 +29,7 @@
         {
           "all_frames": true,
           "js": [
-            "content/main.js"
+           "js/jquery.min.js", "content/main.js"
           ],
           "matches": [
             "http://*/*",
