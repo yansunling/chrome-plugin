@@ -4,7 +4,7 @@ let countPassword=0;
 let countUsername=0;
 
 //content_scripts——>background发送消息
-chrome.runtime.sendMessage({type:'getAccount'},function(response) {
+// chrome.runtime.sendMessage({type:'getAccount'},function(response) {
     // init(response.data);
     // setPasswordFunc(response.data);
     // setUsernameFunc(response.data);
@@ -20,7 +20,7 @@ chrome.runtime.sendMessage({type:'getAccount'},function(response) {
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhNFozMnd1ZFNxY2VBOUxoWVotWkpNR2VhNFJITWt1SXgxcU5aQ3d6VkEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXN5c3RlbS10b2tlbi1nNHNueiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ2aWV3LXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjY4NzllYjBmLWRjMGYtNDNjMC05OTQ4LTVhMzU0ZDNiZWEzNCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDp2aWV3LXN5c3RlbSJ9.R0gW1hSxuVlK0boPqQsV1WZGltP4UjveZIB_yQWWClWV09qDYgKKLcwPoqjgj-AZkCsxS8fv1j9PHy3orUzLwJcn4MauQEYZsfZa1825qrQntlwl0I2dZvRSDcqTGhj1-jI48T7Ch3-4I4H0-SMfYlKpde5lNDVZMxYwz6W4qqCrQDh5N65syxfN4aqKdKfcrVpiAHW-q0beS3IVoSD9kXwd84zSG_RF_tZ7P4Kl4ToACpv3-VALVBkeZW5p7WgXYT7oJ9JT-AWOtXJXsX7zh0GpFvGs4wTlAYNo4NGvU1KLy8IcQ9T8uA_4afv6OqH6vbpFWJSeuO8pqi9Gyk2PLw";
         setPassword(passWord);
     }*/
-});
+// });
 
 
 
@@ -37,8 +37,19 @@ setTimeout(function () {
     }else if(url.indexOf("https://k8s.prt.tuolong56.com/#/login")>=0){
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhNFozMnd1ZFNxY2VBOUxoWVotWkpNR2VhNFJITWt1SXgxcU5aQ3d6VkEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXN5c3RlbS10b2tlbi1nNHNueiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ2aWV3LXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjY4NzllYjBmLWRjMGYtNDNjMC05OTQ4LTVhMzU0ZDNiZWEzNCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDp2aWV3LXN5c3RlbSJ9.R0gW1hSxuVlK0boPqQsV1WZGltP4UjveZIB_yQWWClWV09qDYgKKLcwPoqjgj-AZkCsxS8fv1j9PHy3orUzLwJcn4MauQEYZsfZa1825qrQntlwl0I2dZvRSDcqTGhj1-jI48T7Ch3-4I4H0-SMfYlKpde5lNDVZMxYwz6W4qqCrQDh5N65syxfN4aqKdKfcrVpiAHW-q0beS3IVoSD9kXwd84zSG_RF_tZ7P4Kl4ToACpv3-VALVBkeZW5p7WgXYT7oJ9JT-AWOtXJXsX7zh0GpFvGs4wTlAYNo4NGvU1KLy8IcQ9T8uA_4afv6OqH6vbpFWJSeuO8pqi9Gyk2PLw";
         setPassword(passWord);
+    }else if(url=="https://tlwl.uat.tuolong56.com/query/"||url=='https://kp.tuolong56.com/query/'){
+            $("#authIframe").contents().find("#username").val("T1113");
+            $("#authIframe").contents().find("#password").val("0834");
+            $("#authIframe").contents().find("input[name='submit']")[0].click();
+    }else if(url=='https://tlwl.uat.tuolong56.com/portalv-page/#/homePage'){
+        window.location.href='https://tlwl.uat.tuolong56.com';
+    }else if(url=="https://tlwl.uat.tuolong56.com/tempLogin?token=backdoor"){
+        console.log(222);
+        $("#userName").val("T1113");
+        $("#password").val("0834");
+        $("#submitBtn").click();
     }
-},100);
+},200);
 
 
 
