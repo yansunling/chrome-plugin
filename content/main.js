@@ -50,7 +50,7 @@ setTimeout(function () {
         $("#password").val("0834");
         $("#submitBtn").click();
     }
-},200);
+},500);
 
 
 
