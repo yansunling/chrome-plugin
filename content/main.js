@@ -46,7 +46,7 @@ setTimeout(function () {
         },2000);
     }else if(url.indexOf('https://172.16.17.101/#/workloads?namespace=default')>=0){//k8s 命名称空间默认跳转到tlwl-uat
         window.location.href="https://172.16.17.101/#/workloads?namespace=tlwl-uat";
-    }else if(url=='https://k8s.prt.tuolong56.com/#/overview?namespace=default'){//k8s 命名称空间默认跳转到tlwl-uat
+    }else if(url=='https://k8s.prt.tuolong56.com/#/overview?namespace=default'||url=='https://k8s.prt.tuolong56.com/#/workloads?namespace=default'){//k8s 命名称空间默认跳转到tlwl-uat
         window.location.href="https://k8s.prt.tuolong56.com/#/overview?namespace=tlwl";
     }else if(url=="https://tlwl.uat.tuolong56.com/query/"||url=='https://kp.tuolong56.com/query/'||url=='http://localhost/crmx/login.html'){
             $("#authIframe").contents().find("#username").val("T1113");
