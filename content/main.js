@@ -31,18 +31,23 @@ setTimeout(function () {
     if(url.indexOf("https://k8s.test.tuolong56.com/#/login")>=0){
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6IkFMR1NGZWRVTTZnb3VrOEs2TGZxWXRfbHRjR09IVVNqZk1QekpmY2x4YUUifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjo1MjY3MjA2ODIxLCJpYXQiOjE2NjcyMTA0MjEsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiMDI2OTYyMWQtN2M0MC00ODE5LTg0MGMtZjE0MTNhMDA4MmRjIn19LCJuYmYiOjE2NjcyMTA0MjEsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.kD2Bukwk_5Jf6lBU96p39s0qjrg3t3yehWgvZiJ0fsIDlhIA_7ENEkEXPNZ4IYOKgxHyCswqEbv0ahzulLe3H8rqbZ7jAxJsxL8K4ozMPf1pcWpJg71lBed1rIVeYIe7yM5Unpvs6YSpbiKfOfxo-87UpD_Tpz5kSNzQm_CeFCEUet6cCdiq71ok-J7OrAFiKSRr_lZGaml7ILFLTclwY3hxhgUgR0rQJ2EPAgKJ_PqPXIyjMewUXpM7We3UPfatJCgdBUnA-J0ce893gJ7qWgSuXchCtd96XxRzGOHFFn96YVsuWtD8dyWo8wYDMpzidkhyttiRPE1djyxXsAkv5w";
         setPassword(passWord);
+        setTimeout(function () {
+            window.location.href="https://k8s.test.tuolong56.com/#/pod?namespace=tlwl-test";
+        },2000);
+    }else if(url.indexOf('https://k8s.test.tuolong56.com/#/workloads?namespace=default')>=0){//k8s 命名称空间默认跳转到tlwl-uat
+        window.location.href="https://k8s.test.tuolong56.com/#/pod?namespace=tlwl-test";
     }else if(url.indexOf("https://k8s.prt.tuolong56.com/#/login")>=0){
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6Im1zTXZqZnBVY1dpMGFUMXVzZVRRdXdESUhDX25XLUg0Q042RUViNi10OEEifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjo1MjY5MjQ2NDAzLCJpYXQiOjE2NjkyNTAwMDMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJ2aWV3LXN5c3RlbSIsInVpZCI6ImFiZjllZmE5LTkwYmMtNDU0Yy05MDgyLThlNTIzNzM4ZWI1ZiJ9fSwibmJmIjoxNjY5MjUwMDAzLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6dmlldy1zeXN0ZW0ifQ.MQ0Wf-Ld35P8bXdKXdB5Cq5Aa-FrLEOOOslNX6oidxTUza9amC7QNucJKiA0BvSHfPY7UvFh40pjQQPF4LXUMYxs9BLdUWIU6ASjy8t4wjKlO9p1Ybp0VO9QvTEFfbRyo_C1t0zRtW8YYujhEq0ipDDo3Fc2cRtO3tMX5KdzEDmCoPWVQHYqY1nHCb9da6wHLuDADnc7hbP4rTm4PKkmZhC_3cnV6anbRKxopSH5saQSvVeYn2xuy1eIaWWdlwszKKihGIavUf3V2-sCVXfkq_4m-EwZ5F-53aDW9qfBctwOPmygXDhoZVtQbivXVeqdHCItgIltKwjYdYFPeuIUIA";
         setPassword(passWord);
         setTimeout(function () {
-            window.location.href="https://k8s.prt.tuolong56.com/#/overview?namespace=tlwl";
+            window.location.href="https://k8s.prt.tuolong56.com/#/pod?namespace=tlwl";
         },2000);
 
     }else if(url.indexOf("https://172.16.17.101/#/login")>=0){//k8s uat环境新的地址
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6IkhJVE9qT3c5NXl1amhuR0FfX3BnNE5BazhfSWtoNEhxUFNEMkVZcy1jQkkifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjo1MjY3MzQ4NTY4LCJpYXQiOjE2NjczNTIxNjgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiYTFhMDY3ODctMzc2NS00ZThhLTkyMzgtMzVjNGJhMDkzZWVjIn19LCJuYmYiOjE2NjczNTIxNjgsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.KdYZ_F5N6VNIGK1znssVouvrWTkNS0tEIB9Mg6dTukCPl10LaCcFxmSrQGMkADiQFGY54Ul0aj1ZZ9mAmdq9SLiyXfTFYn2ps45RyMLKh4wzPgYP9OYUgykc5EwPyVPAgudv6fSZHzBYV1l0AcYS7P8zM2szZGdNiMmNfm-tsL7Az4g0f8BoxkjRkA1b3bfSzOKXpL8n7lQ5dwLeUUfdkcYcU6kApXaEa5VdCxDYZ_LRKjsiMdonGI72Rc27Gr5NLFdYTiU7ReAE30p_Dp_GbeqEyFJCYGvA41xnSlP0NSWrCSLobjGRVO-e4hnyZ7v-DnxzbhJEC3kPjSJQcT0ttQ";
         setPassword(passWord);
         setTimeout(function () {
-            window.location.href="https://172.16.17.101/#/workloads?namespace=tlwl-uat";
+            window.location.href="https://172.16.17.101/#/pod?namespace=tlwl-uat";
         },2000);
     }else if(url.indexOf('https://172.16.17.101/#/workloads?namespace=default')>=0){//k8s 命名称空间默认跳转到tlwl-uat
         window.location.href="https://172.16.17.101/#/pod?namespace=tlwl-uat";
