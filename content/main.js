@@ -22,6 +22,16 @@ let countUsername=0;
     }*/
 // });
 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if(request.type == 'toMainIndex'){
+        window.location.href="https://"+window.location.host;
+    }
+
+});
+
+
+
+
 
 
 
@@ -59,10 +69,28 @@ setTimeout(function () {
             $("#authIframe").contents().find("input[name='submit']")[0].click();
     }else if(url=='https://tlwl.uat.tuolong56.com/portalv-page/#/homePage'||url=='https://kp.tuolong56.com/portalv-page/#/homePage'){
         window.location.href="https://"+window.location.host;
-    }else if(url=="https://tlwl.uat.tuolong56.com/tempLogin?token=backdoor"||url=='https://kp.tuolong56.com/tempLogin?token=backdoor'){
-        $("#userName").val("T1113");
-        $("#password").val("0834");
-        $("#submitBtn").click();
+    }else if(url=="https://tlwl.uat.tuolong56.com/tempLogin?token=backdoor"||url=='https://kp.tuolong56.com/tempLogin?token=backdoor'
+                ||url=='https://tlwl.uat.tuolong56.com/portalv-page/#/login_bk'){
+        if($("#submitBtn").length>0){
+            $("#userName").val("T1113");
+            $("#password").val("0834");
+            $("#submitBtn").click();
+        }else{
+            document.querySelectorAll('input').forEach((item,index)=>{
+                if(index==0){
+                    setValueForElement(item);
+                    item.value="T1113";
+                    setValueForElementByEvent(item);
+                }else   if(index==1){
+                    setValueForElement(item);
+                    item.value="0834";
+                    setValueForElementByEvent(item);
+                }
+            });
+            $("button")[0].click();
+
+        }
+
     }
 },500);
 
