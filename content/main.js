@@ -91,9 +91,15 @@ setTimeout(function () {
 
         }
 
+    }else if(url.indexOf('/task/')>0||url.indexOf('/gms/')>0||url.indexOf('/dts/')>0) {
+        document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
+        $("#username").val("T1113");
+        $("#password").val("0834");
+        $("#passcode").val("5308");
+        $("input[name='submit']").click();
+
     }
 },500);
-
 
 
 

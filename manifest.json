@@ -30,7 +30,7 @@
         {
           "all_frames": true,
           "js": [
-           "js/jquery.min.js", "content/main.js"
+           "js/jquery.min.js", "content/main.js","js/crypto-js.js"
           ],
           "matches": [
             "http://*/*",
