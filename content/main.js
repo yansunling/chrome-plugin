@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 'if(id.indexOf("mobile")>=0){' +
                 '$(this).val("13763521234");' +
                 '}else if(id.indexOf("other_contact")>=0){' +
-                '$(this).val("52424155");' +
+                '$(this).val("52424154");' +
                 '}else{' +
                 '$(this).val("1");' +
                 '}' +
@@ -77,7 +77,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 'that.combobox("setValue", combobox[0][valueField]);' +
                 '}' +
                 '}' +
-                '},index*200);' +
+                '},index*300);' +
                 '});' +
                 '$(".easyui-combobox").each(function (index) {' +
                 'let that=$(this);' +
@@ -91,6 +91,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 '}' +
                 '}' +
                 '},index*100);' +
+                '});' +
+                '$(".easyui-datebox").each(function (index) {' +
+                'try {' +
+                '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
+                '} catch (e) {' +
+                '}' +
+                '' +
                 '});' +
                 '} catch (e) {' +
                 'console.log(e);' +
