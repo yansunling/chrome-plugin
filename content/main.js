@@ -2,7 +2,6 @@
 var isFirefox = navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Gecko/') !== -1;
 let countPassword=0;
 let countUsername=0;
-
 //content_scripts——>background发送消息
 // chrome.runtime.sendMessage({type:'getAccount'},function(response) {
     // init(response.data);
@@ -26,7 +25,83 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.type == 'toMainIndex'){
         window.location.href="https://"+window.location.host;
     }
+    if(request.type=='toFilter'){
+        console.log(new Date().getTime());
 
+
+        let nowTime=new Date().getTime();
+        if(nowTime-request.time>5){
+            return;
+        }
+        try {
+            let frame = window.top.frames['jcdfDiglogDivIframe'].document;
+            let script = frame.createElement("script");
+            script.type="text/javascript";
+            script.innerHTML = 'try {' +
+                '$(".easyui-numberbox").each(function () {' +
+                'let value=$(this).numberbox("getValue");' +
+                'if(!value){' +
+                '$(this).numberbox("setValue", 1);' +
+                '}' +
+                '});' +
+                '' +
+                '$(".easyui-validatebox").each(function () {' +
+                'let clazz = $(this).attr("class");' +
+                'if (clazz.indexOf("numberbox") > 0) {' +
+                'let value=$(this).numberbox("getValue");' +
+                'if(!value){' +
+                '$(this).numberbox("setValue", 1);' +
+                '}' +
+                '} else {' +
+                'let value=$(this).val();' +
+                'if(!value){' +
+                'let id = $(this).attr("id");' +
+                'if(id.indexOf("mobile")>=0){' +
+                '$(this).val("13763521234");' +
+                '}else if(id.indexOf("other_contact")>=0){' +
+                '$(this).val("52424155");' +
+                '}else{' +
+                '$(this).val("1");' +
+                '}' +
+                '}' +
+                '}' +
+                '});' +
+                '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
+                'let that=$(this);' +
+                'setTimeout(function () {' +
+                'let value =that.queryCombobox("getValue");' +
+                'if(!value){' +
+                'let combobox = that.combobox("getData");' +
+                'let valueField = that.combobox("options").valueField;' +
+                'if (combobox.length > 0) {' +
+                'that.combobox("setValue", combobox[0][valueField]);' +
+                '}' +
+                '}' +
+                '},index*200);' +
+                '});' +
+                '$(".easyui-combobox").each(function (index) {' +
+                'let that=$(this);' +
+                'setTimeout(function () {' +
+                'let value = that.combobox("getValue");' +
+                'if(!value){' +
+                'let combobox = that.combobox("getData");' +
+                'let valueField = that.combobox("options").valueField;' +
+                'if (combobox.length > 0) {' +
+                'that.combobox("setValue", combobox[0][valueField]);' +
+                '}' +
+                '}' +
+                '},index*100);' +
+                '});' +
+                '} catch (e) {' +
+                'console.log(e);' +
+                '}';
+            frame.body.appendChild(script);
+        } catch (e) {
+            console.log(e);
+        }
+
+
+    }
 });
 
 
@@ -91,13 +166,26 @@ setTimeout(function () {
 
         }
 
+    }else if(url.indexOf('http://kn.cj7a.com/task/')>=0){
+        document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
+        $("#username").val("5498");
+        $("#password").val("1234");
+        $("#passcode").val("5308");
+        $("input[name='submit']").click();
     }else if(url.indexOf('/task/')>0||url.indexOf('/gms/')>0||url.indexOf('/dts/')>0) {
         document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
         $("#username").val("T1113");
         $("#password").val("0834");
         $("#passcode").val("5308");
         $("input[name='submit']").click();
-
+    }else if(url.indexOf('archery.cj7a.com/login')>0){
+        $("#inputUsername").val("T1113");
+        $("#inputPassword").val("123456");
+        $("#btnLogin").click();
+    }else if(url.indexOf('/auth/')>0){
+        $("#username").val("T1113");
+        $("#password").val("0834");
+        $("input[name='submit']").click();
     }
 },500);
 
@@ -229,7 +317,9 @@ function setUsernameFunc({username,password}){
 
 // set value of the given element
 function setValueForElement(el) {
+
     var valueToSet = el.value;
+    console.log(valueToSet);
     // clickElement(el);
     // doFocusElement(el, false);
     el.dispatchEvent(normalizeEvent(el, 'keydown'));
