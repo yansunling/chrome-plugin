@@ -26,90 +26,113 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         window.location.href="https://"+window.location.host;
     }
     if(request.type=='toFilter'){
-        console.log(new Date().getTime());
-
-
         let nowTime=new Date().getTime();
         if(nowTime-request.time>5){
             return;
         }
         try {
+
+            if(!window.top.frames['jcdfDiglogDivIframe']){
+                let frames = window.top.frames;
+                if(frames.length>0){
+                    for(let i=0;i<frames.length;i++){
+                        let frame=frames[i];
+                        try {
+                            setFormData(frame.document);
+                        } catch (e) {
+                            console.log(e);
+                        }
+                    }
+                }else{
+                    document.querySelectorAll('input').forEach((item,index)=>{
+                        console.log(item);
+
+                            item.value="1";
+                            setValueForElementByEvent(item);
+                    });
+                }
+                return ;
+            }
             let frame = window.top.frames['jcdfDiglogDivIframe'].document;
-            let script = frame.createElement("script");
-            script.type="text/javascript";
-            script.innerHTML = 'try {' +
-                '$(".easyui-numberbox").each(function () {' +
-                'let value=$(this).numberbox("getValue");' +
-                'if(!value){' +
-                '$(this).numberbox("setValue", 1);' +
-                '}' +
-                '});' +
-                '' +
-                '$(".easyui-validatebox").each(function () {' +
-                'let clazz = $(this).attr("class");' +
-                'if (clazz.indexOf("numberbox") > 0) {' +
-                'let value=$(this).numberbox("getValue");' +
-                'if(!value){' +
-                '$(this).numberbox("setValue", 1);' +
-                '}' +
-                '} else {' +
-                'let value=$(this).val();' +
-                'if(!value){' +
-                'let id = $(this).attr("id");' +
-                'if(id.indexOf("mobile")>=0){' +
-                '$(this).val("13763521234");' +
-                '}else if(id.indexOf("other_contact")>=0){' +
-                '$(this).val("52424154");' +
-                '}else{' +
-                '$(this).val("1");' +
-                '}' +
-                '}' +
-                '}' +
-                '});' +
-                '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
-                'let that=$(this);' +
-                'setTimeout(function () {' +
-                'let value =that.queryCombobox("getValue");' +
-                'if(!value){' +
-                'let combobox = that.combobox("getData");' +
-                'let valueField = that.combobox("options").valueField;' +
-                'if (combobox.length > 0) {' +
-                'that.combobox("setValue", combobox[0][valueField]);' +
-                '}' +
-                '}' +
-                '},index*300);' +
-                '});' +
-                '$(".easyui-combobox").each(function (index) {' +
-                'let that=$(this);' +
-                'setTimeout(function () {' +
-                'let value = that.combobox("getValue");' +
-                'if(!value){' +
-                'let combobox = that.combobox("getData");' +
-                'let valueField = that.combobox("options").valueField;' +
-                'if (combobox.length > 0) {' +
-                'that.combobox("setValue", combobox[0][valueField]);' +
-                '}' +
-                '}' +
-                '},index*100);' +
-                '});' +
-                '$(".easyui-datebox").each(function (index) {' +
-                'try {' +
-                '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
-                '} catch (e) {' +
-                '}' +
-                '' +
-                '});' +
-                '} catch (e) {' +
-                'console.log(e);' +
-                '}';
-            frame.body.appendChild(script);
+            setFormData(frame);
+
         } catch (e) {
             console.log(e);
         }
-
-
     }
 });
+
+function setFormData(frame){
+    let script = frame.createElement("script");
+    script.type="text/javascript";
+    script.innerHTML = 'try {' +
+        '$(".easyui-numberbox").each(function () {' +
+        'let value=$(this).numberbox("getValue");' +
+        'if(!value){' +
+        '$(this).numberbox("setValue", 1);' +
+        '}' +
+        '});' +
+        '' +
+        '$(".easyui-validatebox").each(function () {' +
+        'let clazz = $(this).attr("class");' +
+        'if (clazz.indexOf("numberbox") > 0) {' +
+        'let value=$(this).numberbox("getValue");' +
+        'if(!value){' +
+        '$(this).numberbox("setValue", 1);' +
+        '}' +
+        '} else {' +
+        'let value=$(this).val();' +
+        'if(!value){' +
+        'let id = $(this).attr("id");' +
+        'if(id.indexOf("mobile")>=0){' +
+        '$(this).val("13763521234");' +
+        '}else if(id.indexOf("other_contact")>=0){' +
+        '$(this).val("52424154");' +
+        '}else{' +
+        '$(this).val("1");' +
+        '}' +
+        '}' +
+        '}' +
+        '});' +
+        '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
+        'let that=$(this);' +
+        'setTimeout(function () {' +
+        'let value =that.queryCombobox("getValue");' +
+        'if(!value){' +
+        'let combobox = that.combobox("getData");' +
+        'let valueField = that.combobox("options").valueField;' +
+        'if (combobox.length > 0) {' +
+        'that.combobox("setValue", combobox[0][valueField]);' +
+        '}' +
+        '}' +
+        '},index*300);' +
+        '});' +
+        '$(".easyui-combobox").each(function (index) {' +
+        'let that=$(this);' +
+        'setTimeout(function () {' +
+        'let value = that.combobox("getValue");' +
+        'if(!value){' +
+        'let combobox = that.combobox("getData");' +
+        'let valueField = that.combobox("options").valueField;' +
+        'if (combobox.length > 0) {' +
+        'that.combobox("setValue", combobox[0][valueField]);' +
+        '}' +
+        '}' +
+        '},index*100);' +
+        '});' +
+        '$(".easyui-datebox").each(function (index) {' +
+        'try {' +
+        '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
+        '} catch (e) {' +
+        '}' +
+        '' +
+        '});' +
+        '} catch (e) {' +
+        'console.log(e);' +
+        '}';
+    frame.body.appendChild(script);
+}
+
 
 
 
