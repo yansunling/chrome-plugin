@@ -45,13 +45,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     }
                 }else{
                     document.querySelectorAll('input').forEach((item,index)=>{
-                        console.log(item);
                         if(item.value){
                             return;
                         }
                         if('请选择'==item.getAttribute("placeholder")){
                             item.click();
-
                             setTimeout(function () {
                                 const ke1 = new KeyboardEvent('keydown', {
                                     bubbles: true, cancelable: true, keyCode: 40
@@ -61,15 +59,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                                     bubbles: true, cancelable: true, keyCode: 13
                                 });
                                 item.dispatchEvent(ke);
-                            },index*100)
+                            },index*100);
                         }else if(item.classList.contains("el-upload__input")){
                             return;
                         }else{
-                            item.value="1";
-                            setValueForElementByEvent(item);
-
-
-
+                            setTimeout(function () {
+                                if(item.value){
+                                    return;
+                                }
+                                item.value="1";
+                                setValueForElementByEvent(item);
+                            },index*200);
                         }
                     });
                 }
@@ -371,7 +371,6 @@ function setUsernameFunc({username,password}){
 function setValueForElement(el) {
 
     var valueToSet = el.value;
-    console.log(valueToSet);
     // clickElement(el);
     // doFocusElement(el, false);
     el.dispatchEvent(normalizeEvent(el, 'keydown'));
@@ -394,6 +393,7 @@ function setValueForElementByEvent(el) {
     ev1.initEvent('change', true, true);
     el.dispatchEvent(ev1);
     el.blur();
+    console.log(el);
     el.value !== valueToSet && (el.value = valueToSet);
 }
 
