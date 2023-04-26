@@ -46,9 +46,31 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 }else{
                     document.querySelectorAll('input').forEach((item,index)=>{
                         console.log(item);
+                        if(item.value){
+                            return;
+                        }
+                        if('请选择'==item.getAttribute("placeholder")){
+                            item.click();
 
+                            setTimeout(function () {
+                                const ke1 = new KeyboardEvent('keydown', {
+                                    bubbles: true, cancelable: true, keyCode: 40
+                                });
+                                item.dispatchEvent(ke1);
+                                const ke = new KeyboardEvent('keydown', {
+                                    bubbles: true, cancelable: true, keyCode: 13
+                                });
+                                item.dispatchEvent(ke);
+                            },index*100)
+                        }else if(item.classList.contains("el-upload__input")){
+                            return;
+                        }else{
                             item.value="1";
                             setValueForElementByEvent(item);
+
+
+
+                        }
                     });
                 }
                 return ;
