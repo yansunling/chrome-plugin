@@ -232,11 +232,13 @@ setTimeout(function () {
         $("input[name='submit']").click();
     }else if(url.indexOf('archery.cj7a.com/login')>0){
         $("#inputUsername").val("T1113");
-        $("#inputPassword").val("123456");
+        $("#inputPassword").val("0834");
         $("#btnLogin").click();
     }else if(url.indexOf('/auth/')>0){
+        document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
         $("#username").val("T1113");
         $("#password").val("0834");
+        $("#passcode").val("5308");
         $("input[name='submit']").click();
     }
 },500);
