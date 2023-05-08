@@ -180,14 +180,14 @@ setTimeout(function () {
             window.location.href="https://k8s.prt.tuolong56.com/#/pod?namespace=tlwl";
         },2000);
 
-    }else if(url.indexOf("https://172.16.17.101/#/login")>=0){//k8s uat环境新的地址
+    }else if(url.indexOf("https://k8s.uat.tuolong56.com/#/login")>=0){//k8s uat环境新的地址
         let passWord="eyJhbGciOiJSUzI1NiIsImtpZCI6IkhJVE9qT3c5NXl1amhuR0FfX3BnNE5BazhfSWtoNEhxUFNEMkVZcy1jQkkifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjo1MjY3MzQ4NTY4LCJpYXQiOjE2NjczNTIxNjgsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiYTFhMDY3ODctMzc2NS00ZThhLTkyMzgtMzVjNGJhMDkzZWVjIn19LCJuYmYiOjE2NjczNTIxNjgsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.KdYZ_F5N6VNIGK1znssVouvrWTkNS0tEIB9Mg6dTukCPl10LaCcFxmSrQGMkADiQFGY54Ul0aj1ZZ9mAmdq9SLiyXfTFYn2ps45RyMLKh4wzPgYP9OYUgykc5EwPyVPAgudv6fSZHzBYV1l0AcYS7P8zM2szZGdNiMmNfm-tsL7Az4g0f8BoxkjRkA1b3bfSzOKXpL8n7lQ5dwLeUUfdkcYcU6kApXaEa5VdCxDYZ_LRKjsiMdonGI72Rc27Gr5NLFdYTiU7ReAE30p_Dp_GbeqEyFJCYGvA41xnSlP0NSWrCSLobjGRVO-e4hnyZ7v-DnxzbhJEC3kPjSJQcT0ttQ";
         setPassword(passWord);
         setTimeout(function () {
-            window.location.href="https://172.16.17.101/#/pod?namespace=tlwl-uat";
+            window.location.href="https://k8s.uat.tuolong56.com/#/pod?namespace=tlwl-uat";
         },2000);
-    }else if(url.indexOf('https://172.16.17.101/#/workloads?namespace=default')>=0){//k8s 命名称空间默认跳转到tlwl-uat
-        window.location.href="https://172.16.17.101/#/pod?namespace=tlwl-uat";
+    }else if(url.indexOf('https://k8s.uat.tuolong56.com/#/workloads?namespace=default')>=0){//k8s 命名称空间默认跳转到tlwl-uat
+        window.location.href="https://k8s.uat.tuolong56.com/#/pod?namespace=tlwl-uat";
     }else if(url=='https://k8s.prt.tuolong56.com/#/overview?namespace=default'||url=='https://k8s.prt.tuolong56.com/#/workloads?namespace=default'){//k8s 命名称空间默认跳转到tlwl-uat
         window.location.href="https://k8s.prt.tuolong56.com/#/pod?namespace=tlwl";
     }else if(url=="https://tlwl.uat.tuolong56.com/query/"||url=='https://kp.tuolong56.com/query/'||url=='http://localhost/crmx/login.html'){
@@ -215,8 +215,8 @@ setTimeout(function () {
                 }
             });
             $("button")[0].click();
-
         }
+
 
     }else if(url.indexOf('http://kn.cj7a.com/task/')>=0){
         document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
