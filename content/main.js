@@ -31,47 +31,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             return;
         }
         try {
-
-            if(!window.top.frames['jcdfDiglogDivIframe']){
+            let iframe=window.top.frames['jcdfDiglogDivIframe'];
+            if(typeof iframe== "undefined"){
                 let frames = window.top.frames;
                 if(frames.length>0){
                     for(let i=0;i<frames.length;i++){
                         let frame=frames[i];
                         try {
                             setFormData(frame.document);
+                            setSourceForm(frame.document);
                         } catch (e) {
                             console.log(e);
                         }
                     }
                 }else{
-                    document.querySelectorAll('input').forEach((item,index)=>{
-                        if(item.value){
-                            return;
-                        }
-                        if('请选择'==item.getAttribute("placeholder")){
-                            item.click();
-                            setTimeout(function () {
-                                const ke1 = new KeyboardEvent('keydown', {
-                                    bubbles: true, cancelable: true, keyCode: 40
-                                });
-                                item.dispatchEvent(ke1);
-                                const ke = new KeyboardEvent('keydown', {
-                                    bubbles: true, cancelable: true, keyCode: 13
-                                });
-                                item.dispatchEvent(ke);
-                            },index*100);
-                        }else if(item.classList.contains("el-upload__input")){
-                            return;
-                        }else{
-                            setTimeout(function () {
-                                if(item.value){
-                                    return;
-                                }
-                                item.value="1";
-                                setValueForElementByEvent(item);
-                            },index*200);
-                        }
-                    });
+                    setSourceForm(document);
                 }
                 return ;
             }
@@ -84,74 +58,147 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
+function setSourceForm(document){
+    document.querySelectorAll('input').forEach((item,index)=>{
+        if(item.value){
+            return;
+        }
+        if('请选择'==item.getAttribute("placeholder")){
+            item.click();
+            setTimeout(function () {
+                const ke1 = new KeyboardEvent('keydown', {
+                    bubbles: true, cancelable: true, keyCode: 40
+                });
+                item.dispatchEvent(ke1);
+                const ke = new KeyboardEvent('keydown', {
+                    bubbles: true, cancelable: true, keyCode: 13
+                });
+                item.dispatchEvent(ke);
+            },index*100);
+        }else if(item.classList.contains("el-upload__input")){
+            return;
+        }else{
+            setTimeout(function () {
+                if(item.value){
+                    return;
+                }
+                item.value="1";
+                setValueForElementByEvent(item);
+            },index*200);
+        }
+    });
+    document.querySelectorAll('select').forEach((item,index)=>{
+        item.selectedIndex = 1;
+        const event = new Event('change');
+        item.dispatchEvent(event);
+    });
+    document.querySelectorAll('textarea').forEach((item,index)=>{
+        item.value="打法";
+    });
+}
+
+
+
 function setFormData(frame){
     let script = frame.createElement("script");
     script.type="text/javascript";
-    script.innerHTML = 'try {' +
+    script.innerHTML = 'var setData=function () {' +
+        'try {' +
+        'var maxNum=1;' +
+        'var Rand = Math.random();' +
         '$(".easyui-numberbox").each(function () {' +
-        'let value=$(this).numberbox("getValue");' +
-        'if(!value){' +
+        'let value = $(this).numberbox("getValue");' +
+        'if (!value) {' +
         '$(this).numberbox("setValue", 1);' +
         '}' +
         '});' +
-        '' +
         '$(".easyui-validatebox").each(function () {' +
         'let clazz = $(this).attr("class");' +
         'if (clazz.indexOf("numberbox") > 0) {' +
-        'let value=$(this).numberbox("getValue");' +
-        'if(!value){' +
+        'let value = $(this).numberbox("getValue");' +
+        'if (!value) {' +
         '$(this).numberbox("setValue", 1);' +
         '}' +
         '} else {' +
-        'let value=$(this).val();' +
-        'if(!value){' +
+        'let value = $(this).val();' +
+        'if (!value) {' +
         'let id = $(this).attr("id");' +
-        'if(id.indexOf("mobile")>=0){' +
-        '$(this).val("13763521234");' +
-        '}else if(id.indexOf("other_contact")>=0){' +
-        '$(this).val("52424154");' +
-        '}else{' +
+        'if (id.indexOf("mobile") >= 0) {' +
+        'let mineId = Math.round(Rand * 1000000000);' +
+        '$(this).val("13" + mineId);' +
+        '} else if (id.indexOf("other_contact") >= 0) {' +
+        'let mineId = Math.round(Rand * 100000000);' +
+        '$(this).val(mineId);' +
+        '} else {' +
         '$(this).val("1");' +
         '}' +
         '}' +
         '}' +
         '});' +
         '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
-        'let that=$(this);' +
+        'let that = $(this);' +
+        'if(maxNum<index){' +
+        'maxNum=index;' +
+        '}' +
         'setTimeout(function () {' +
-        'let value =that.queryCombobox("getValue");' +
-        'if(!value){' +
+        'let value = that.queryCombobox("getValue");' +
+        'if (!value) {' +
         'let combobox = that.combobox("getData");' +
         'let valueField = that.combobox("options").valueField;' +
         'if (combobox.length > 0) {' +
         'that.combobox("setValue", combobox[0][valueField]);' +
         '}' +
         '}' +
-        '},index*300);' +
+        '}, index * 300);' +
         '});' +
         '$(".easyui-combobox").each(function (index) {' +
-        'let that=$(this);' +
+        'let that = $(this);' +
+        'if(maxNum<index){' +
+        'maxNum=index;' +
+        '}' +
         'setTimeout(function () {' +
         'let value = that.combobox("getValue");' +
-        'if(!value){' +
+        'if (!value) {' +
         'let combobox = that.combobox("getData");' +
         'let valueField = that.combobox("options").valueField;' +
         'if (combobox.length > 0) {' +
         'that.combobox("setValue", combobox[0][valueField]);' +
         '}' +
         '}' +
-        '},index*100);' +
+        '}, index * 100);' +
         '});' +
         '$(".easyui-datebox").each(function (index) {' +
         'try {' +
         '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
         '} catch (e) {' +
         '}' +
-        '' +
         '});' +
+        'let checkList=[];' +
+        '$("input[type=\\"checkbox\\"]").each(function (index) {' +
+        '                let name=$(this).attr("name");' +
+        '                if(name&&checkList.indexOf(name)<0){' +
+        '                    $(this).attr("checked","true");' +
+        'checkList.push(name);' +
+        '                }' +
+        '});' +
+        '$("input[type=\'radio\']").each(function (index) {' +
+        'let name=$(this).attr("name");' +
+        'if(name&&checkList.indexOf(name)<0){' +
+        '$(this).attr("checked","true");' +
+        'checkList.push(name);' +
+        '}' +
+        '});' +
+        '' +
         '} catch (e) {' +
         'console.log(e);' +
-        '}';
+        '}' +
+        'return maxNum;' +
+        '};' +
+        'let nextTime=setData();' +
+        'setTimeout(function () {' +
+        'setData();' +
+        'console.log(nextTime*100)' +
+        '},nextTime*50);';
     frame.body.appendChild(script);
 }
 
@@ -238,6 +285,12 @@ setTimeout(function () {
         document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
         $("#username").val("T1113");
         $("#password").val("0834");
+        $("#passcode").val("5308");
+        $("input[name='submit']").click();
+    }else if(url.indexOf('/mdms/')>0) {
+        document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
+        $("#username").val("root");
+        $("#password").val("1111");
         $("#passcode").val("5308");
         $("input[name='submit']").click();
     }
@@ -395,7 +448,6 @@ function setValueForElementByEvent(el) {
     ev1.initEvent('change', true, true);
     el.dispatchEvent(ev1);
     el.blur();
-    console.log(el);
     el.value !== valueToSet && (el.value = valueToSet);
 }
 
