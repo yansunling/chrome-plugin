@@ -2,12 +2,6 @@
 
 
 
-// chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-//
-//     console.log(window.location.host)
-//
-// });
-
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
@@ -16,4 +10,17 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
             console.log('来自content的回复：'+response);
         });
     }
+});
+
+
+//快捷方式自动填充
+chrome.commands.onCommand.addListener((command) => {
+   if(command=='myCommand'){
+       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+           console.log(tabs);
+           chrome.tabs.sendMessage(tabs[0].id, {type:'toFilter', tab:tabs[0],time:new Date().getTime()}, function (response) {
+               console.log("Send Success");
+           });
+       });
+   }
 });

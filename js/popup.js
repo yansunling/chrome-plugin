@@ -8,10 +8,9 @@ $(function () {
                console.log("Send Success");
            });
        });
-
-
-
    });
-
 });
+
+
+
 

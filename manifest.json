@@ -21,7 +21,10 @@
         "tabs", 
         "background", 
         "history" ,
-        "https://*/*"
+        "https://*/*",
+        "activeTab",
+        "storage",
+      "commands"
     ],
     "background": {
       "scripts": ["js/jquery.min.js","background/main.js"]
@@ -40,5 +43,14 @@
           "run_at": "document_end"
 
         }
-    ]
+    ],
+  "commands": {
+    "myCommand": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+I"
+      },
+      "description": "My custom command"
+    }
+
+  }
 }

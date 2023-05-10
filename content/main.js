@@ -21,6 +21,10 @@ let countUsername=0;
     }*/
 // });
 
+
+
+
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.type == 'toMainIndex'){
         window.location.href="https://"+window.location.host;
