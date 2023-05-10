@@ -13,6 +13,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 
+
 //快捷方式自动填充
 chrome.commands.onCommand.addListener((command) => {
    if(command=='myCommand'){
