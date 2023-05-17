@@ -114,7 +114,7 @@ function setFormData(frame){
         '} else {' +
         'var result = "";\n' +
         '  for (var i = 0; i < 3; i++) {\n' +
-        '   var char = Math.floor(Math.random() * 100 + 19968);console.log(char);' +
+        '   var char = Math.floor(Math.random() * 100 + 19968);' +
         ' result += String.fromCharCode(char);\n' +
         '  }' +
         '$(this).val(result);' +
@@ -184,7 +184,6 @@ function setFormData(frame){
         'var nextTime=setData();' +
         'setTimeout(function () {' +
         'setData();' +
-        'console.log(nextTime*100)' +
         '},nextTime*50);';
     frame.body.appendChild(script);
 }
