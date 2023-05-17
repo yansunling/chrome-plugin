@@ -112,7 +112,12 @@ function setFormData(frame){
         'let mineId = Math.round(Rand * 100000000);' +
         '$(this).val(mineId);' +
         '} else {' +
-        '$(this).val("1");' +
+        'var result = "";\n' +
+        '  for (var i = 0; i < 3; i++) {\n' +
+        '   var char = Math.floor(Math.random() * 100 + 19968);console.log(char);' +
+        ' result += String.fromCharCode(char);\n' +
+        '  }' +
+        '$(this).val(result);' +
         '}' +
         '}' +
         '}' +
@@ -176,7 +181,7 @@ function setFormData(frame){
         '}' +
         'return maxNum;' +
         '};' +
-        'let nextTime=setData();' +
+        'var nextTime=setData();' +
         'setTimeout(function () {' +
         'setData();' +
         'console.log(nextTime*100)' +
@@ -219,10 +224,18 @@ setTimeout(function () {
         window.location.href="https://k8s.uat.tuolong56.com/#/pod?namespace=tlwl-uat";
     }else if(url=='https://k8s.prt.tuolong56.com/#/overview?namespace=default'||url=='https://k8s.prt.tuolong56.com/#/workloads?namespace=default'){//k8s 命名称空间默认跳转到tlwl-uat
         window.location.href="https://k8s.prt.tuolong56.com/#/pod?namespace=tlwl";
-    }else if(url=="https://tlwl.uat.tuolong56.com/query/"||url=='https://kp.tuolong56.com/query/'||url=='http://localhost/crmx/login.html'){
-            $("#authIframe").contents().find("#username").val("T1113");
-            $("#authIframe").contents().find("#password").val("0834");
-            $("#authIframe").contents().find("input[name='submit']")[0].click();
+    }else if(url.indexOf("/query/")>0||url.indexOf("/crmx/")>0){
+            if( $("#authIframe").length>0){
+                $("#authIframe").contents().find("#username").val("T1113");
+                $("#authIframe").contents().find("#password").val("0834");
+                $("#authIframe").contents().find("input[name='submit']")[0].click();
+            }else{
+                document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
+                $("#username").val("T1113");
+                $("#password").val("0834");
+                $("#passcode").val("5308");
+                $("input[name='submit']").click();
+            }
     }else if(url=='https://tlwl.uat.tuolong56.com/portalv-page/#/homePage'||url=='https://kp.tuolong56.com/portalv-page/#/homePage'){
         window.location.href="https://"+window.location.host;
     }else if(url=="https://tlwl.uat.tuolong56.com/tempLogin?token=backdoor"||url=='https://kp.tuolong56.com/tempLogin?token=backdoor'
