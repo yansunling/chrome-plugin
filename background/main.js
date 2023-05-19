@@ -25,3 +25,16 @@ chrome.commands.onCommand.addListener((command) => {
        });
    }
 });
+
+/*
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        alert(JSON.stringify(details));
+        return {cancel: false};
+    },
+    {
+        urls: ["http://!*!/!*", "https://!*!/!*"],
+        types: ["main_frame"]
+    },
+    ["blocking"]
+);*/

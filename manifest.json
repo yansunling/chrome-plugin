@@ -24,7 +24,9 @@
         "https://*/*",
         "activeTab",
         "storage",
-      "commands"
+      "commands",
+      "webRequest",
+      "webRequestBlocking"
     ],
     "background": {
       "scripts": ["js/jquery.min.js","background/main.js"]
