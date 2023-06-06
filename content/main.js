@@ -120,10 +120,10 @@ function setFormData(frame){
         'let mineId = Math.round(Rand * 100000000);' +
         '$(this).val(mineId);' +
         '} else {' +
-        'var result = "";\n' +
-        '  for (var i = 0; i < 3; i++) {\n' +
+        'var result = "";' +
+        '  for (var i = 0; i < 3; i++) {' +
         '   var char = Math.floor(Math.random() * 100 + 19968);' +
-        ' result += String.fromCharCode(char);\n' +
+        ' result += String.fromCharCode(char);' +
         '  }' +
         '$(this).val(result);' +
         '}' +
@@ -165,6 +165,12 @@ function setFormData(frame){
         '$(".easyui-datebox").each(function (index) {' +
         'try {' +
         '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
+        '} catch (e) {' +
+        '}' +
+        '});' +
+        '$(".easyui-datetimebox").each(function (index) {' +
+        'try {' +
+        '$(this).datetimebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd")+" 00:00:00");' +
         '} catch (e) {' +
         '}' +
         '});' +
