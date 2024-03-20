@@ -49,7 +49,7 @@
   "commands": {
     "myCommand": {
       "suggested_key": {
-        "default": "Ctrl+Shift+I"
+        "default": "Alt+I"
       },
       "description": "My custom command"
     }

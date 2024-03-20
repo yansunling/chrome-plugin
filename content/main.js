@@ -30,6 +30,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                         try {
                             setFormData(frame.document);
                             setSourceForm(frame.document);
+
+                            let innerIframe  = frame.document.querySelectorAll('iframe');
+                            for(let j=0;j<innerIframe.length;j++){
+                                setFormData(innerIframe[j].contentDocument);
+                                setSourceForm(innerIframe[j].contentDocument);
+                            }
+
                         } catch (e) {
                             console.log(e);
                         }
@@ -53,6 +60,7 @@ function setSourceForm(document){
         if(item.value){
             return;
         }
+        console.log(item);
         if('请选择'==item.getAttribute("placeholder")){
             item.click();
             setTimeout(function () {
@@ -72,8 +80,14 @@ function setSourceForm(document){
                 if(item.value){
                     return;
                 }
-                item.value="1";
-                setValueForElementByEvent(item);
+                try{
+                    item.value="1";
+                    setValueForElementByEvent(item);
+                }catch (e) {
+                    console.log(e);
+                }
+
+
             },index*200);
         }
     });
@@ -102,14 +116,18 @@ function setFormData(frame){
         '$(this).numberbox("setValue", 1);' +
         '}' +
         '});' +
-        '$(".easyui-validatebox").each(function () {' +
+        '$(".easyui-validatebox,.easyui-textbox").each(function () {' +
         'let clazz = $(this).attr("class");' +
         'if (clazz.indexOf("numberbox") > 0) {' +
         'let value = $(this).numberbox("getValue");' +
         'if (!value) {' +
         '$(this).numberbox("setValue", 1);' +
         '}' +
-        '} else {' +
+        '} else if (clazz.indexOf("textbox") > 0) {'+
+        ' let value = $(this).textbox("getValue");' +
+        ' if (!value) {' +
+        ' $(this).textbox("setValue", "测试");}' +
+        ' } else {' +
         'let value = $(this).val();' +
         'if (!value) {' +
         'let id = $(this).attr("id");' +
@@ -122,7 +140,7 @@ function setFormData(frame){
         '} else {' +
         'var result = "";' +
         '  for (var i = 0; i < 3; i++) {' +
-        '   var char = Math.floor(Math.random() * 100 + 19968);' +
+        '   var char = Math.floor(Math.random() * 200 + 19968);' +
         ' result += String.fromCharCode(char);' +
         '  }' +
         '$(this).val(result);' +
@@ -279,7 +297,7 @@ setTimeout(function () {
         $("#password").val("1234");
         $("#passcode").val("5308");
         $("input[name='submit']").click();
-    }else if(url.indexOf('/task/')>0||url.indexOf('/gms/')>0||url.indexOf('/dts/')>0) {
+    }else if(url.indexOf('/task/')>0||url.indexOf('/gms/')>0||url.indexOf('/dts/')>0||url.indexOf('http://localhost/tmsp/')>0) {
         document.cookie = "cip_c_c_c_=a+fTVzkV0fg=";
         $("#username").val("T1113");
         $("#password").val("0834");
@@ -301,12 +319,36 @@ setTimeout(function () {
         $("#password").val("1111");
         $("#passcode").val("5308");
         $("input[name='submit']").click();
+    }else if(url.indexOf('/tmsp/')>0) {
+        deleteCookie("auth_c_c_c_");
+        document.cookie = "auth_c_c_c_=mFLWxZMg1Z8=";
+        $("#username").val("T1113");
+        $("#password").val("0834");
+        $("#passcode").val("6856");
+        $("input[name='submit']").click();
     }
 },500);
 
 
 
+function deleteCookie(name) {
+    // 获取当前所有的 cookie
+    const cookies = document.cookie.split(";");
 
+    // 遍历 cookie
+    for (let i = 0; i < cookies.length; i++) {
+        // 获取当前的键值对
+        const cookie = cookies[i].trim();
+        const [cookieName, cookieValue] = cookie.split("=");
+
+        // 检查是否是要删除的 cookie
+        if (cookieName === name) {
+            // 设置 cookie 过期时间为一个过去的时间
+            document.cookie = `${cookieName}=${cookieValue}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            break;
+        }
+    }
+}
 
 
 
