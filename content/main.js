@@ -116,7 +116,11 @@ function setFormData(frame){
         '$(this).numberbox("setValue", 1);' +
         '}' +
         '});' +
+        'let idList=["contact_area","extension_contact"];' +
         '$(".easyui-validatebox,.easyui-textbox").each(function () {' +
+        'if ($(this).is(":hidden")||idList.includes($(this).attr("id"))) {' +
+        '  return;' +
+        ' }' +
         'let clazz = $(this).attr("class");' +
         'if (clazz.indexOf("numberbox") > 0) {' +
         'let value = $(this).numberbox("getValue");' +
@@ -178,6 +182,17 @@ function setFormData(frame){
         'that.combobox("setValue", combobox[0][valueField]);' +
         '}' +
         '}' +
+        'setTimeout(function () {' +
+        '' +
+        '                        let value = that.queryCombobox("getValue");' +
+        '                        if (!value) {' +
+        '                            let combobox = that.combobox("getData");' +
+        '                            let valueField = that.combobox("options").valueField;' +
+        '                            if (combobox.length > 0) {' +
+        '                                that.combobox("select", combobox[0][valueField]);' +
+        '                            }' +
+        '                        }' +
+        '                    },1000);' +
         '}, index * 100);' +
         '});' +
         '$(".easyui-datebox").each(function (index) {' +
@@ -216,7 +231,11 @@ function setFormData(frame){
         'var nextTime=setData();' +
         'setTimeout(function () {' +
         'setData();' +
-        '},nextTime*50);';
+        '},nextTime*50);'+
+        'var nextTime=setData();' +
+        'setTimeout(function () {' +
+        'setData();' +
+        '},nextTime*150);';;
     frame.body.appendChild(script);
 }
 

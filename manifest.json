@@ -29,13 +29,13 @@
       "webRequestBlocking"
     ],
     "background": {
-      "scripts": ["js/jquery.min.js","background/main.js"]
+      "scripts": ["js/jquery.min.js","background/main.js","js/mock-min.js"]
     },
     "content_scripts": [
         {
           "all_frames": true,
           "js": [
-           "js/jquery.min.js", "content/main.js","js/crypto-js.js"
+           "js/jquery.min.js", "content/main.js","js/crypto-js.js","js/mock-min.js"
           ],
           "matches": [
             "http://*/*",
