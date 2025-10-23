@@ -107,8 +107,9 @@ function setFormData(frame){
 
     const script1 = document.createElement('script');
     // 2. 设置元素的关键属性
-    script1.src = "https://cdn.bootcss.com/Mock.js/1.0.1/mock-min.js"; // 设置脚本源地址
+    script1.src = "https://cdn.bootcdn.net/ajax/libs/Mock.js/1.0.1-beta3/mock-min.js"; // 设置脚本源地址
     script1.type = 'text/javascript';
+    frame.body.appendChild(script1);
     let script = frame.createElement("script");
     script.type="text/javascript";
     script.innerHTML = 'var setData=function () {' +
@@ -241,8 +242,10 @@ function setFormData(frame){
         'var nextTime=setData();' +
         'setTimeout(function () {' +
         'setData();' +
-        '},nextTime*150);';;
+        '},nextTime*150);';
     frame.body.appendChild(script);
+
+
 }
 
 
