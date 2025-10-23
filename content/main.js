@@ -110,140 +110,145 @@ function setFormData(frame){
     script1.src = "https://cdn.bootcdn.net/ajax/libs/Mock.js/1.0.1-beta3/mock-min.js"; // 设置脚本源地址
     script1.type = 'text/javascript';
     frame.body.appendChild(script1);
-    let script = frame.createElement("script");
-    script.type="text/javascript";
-    script.innerHTML = 'var setData=function () {' +
-        'try {' +
-        'var maxNum=1;' +
-        'var Rand = Math.random();' +
-        '$(".easyui-numberbox").each(function () {' +
-        'let value = $(this).numberbox("getValue");' +
-        'if (!value) {' +
-        '$(this).numberbox("setValue", 1);' +
-        '}' +
-        '});' +
-        'let idList=["contact_area","extension_contact"];' +
-        '$(".easyui-validatebox,.easyui-textbox").each(function () {' +
-        'if ($(this).is(":hidden")||idList.includes($(this).attr("id"))) {' +
-        '  return;' +
-        ' }' +
-        'let clazz = $(this).attr("class");' +
-        'if (clazz.indexOf("numberbox") > 0) {' +
-        'let value = $(this).numberbox("getValue");' +
-        'if (!value) {' +
-        '$(this).numberbox("setValue", 1);' +
-        '}' +
-        '} else if (clazz.indexOf("textbox") > 0) {'+
-        ' let value = $(this).textbox("getValue");' +
-        ' if (!value) {' +
-        ' $(this).textbox("setValue", "测试");}' +
-        ' } else {' +
-        'let value = $(this).val();' +
-        'if (!value) {' +
-        'let id = $(this).attr("id");' +
-        'if (id.indexOf("mobile") >= 0) {' +
-        'let mineId = Math.round(Rand * 1000000000);' +
-        '$(this).val("13" + mineId);' +
-        '} else if (id.indexOf("other_contact") >= 0) {' +
-        'let mineId = Math.round(Rand * 100000000);' +
-        '$(this).val(mineId);' +
-        '} else {' +
-        'var result = Mock.Random.csentence(3);' +
-        'if(id.indexOf("name")>=0){' +
-        '  result = Mock.Random.cname();' +
-        '  }else if(id.indexOf("code")>=0){' +
-        '  result = Mock.Random.word(3).toUpperCase();' +
-        ' }' +
-        '$(this).val(result);' +
-        '}' +
-        '}' +
-        '}' +
-        '});' +
-        '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
-        'let that = $(this);' +
-        'if(maxNum<index){' +
-        'maxNum=index;' +
-        '}' +
-        'setTimeout(function () {' +
-        'let value = that.queryCombobox("getValue");' +
-        'if (!value) {' +
-        'let combobox = that.combobox("getData");' +
-        'let valueField = that.combobox("options").valueField;' +
-        'if (combobox.length > 0) {' +
-        'that.combobox("setValue", combobox[0][valueField]);' +
-        '}' +
-        '}' +
-        '}, index * 300);' +
-        '});' +
-        '$(".easyui-combobox").each(function (index) {' +
-        'let that = $(this);' +
-        'if(maxNum<index){' +
-        'maxNum=index;' +
-        '}' +
-        'setTimeout(function () {' +
-        'let value = that.combobox("getValue");' +
-        'if (!value) {' +
-        'let combobox = that.combobox("getData");' +
-        'let valueField = that.combobox("options").valueField;' +
-        'if (combobox.length > 0) {' +
-        'that.combobox("setValue", combobox[0][valueField]);' +
-        '}' +
-        '}' +
-        'setTimeout(function () {' +
-        '' +
-        '                        let value = that.queryCombobox("getValue");' +
-        '                        if (!value) {' +
-        '                            let combobox = that.combobox("getData");' +
-        '                            let valueField = that.combobox("options").valueField;' +
-        '                            if (combobox.length > 0) {' +
-        '                                that.combobox("select", combobox[0][valueField]);' +
-        '                            }' +
-        '                        }' +
-        '                    },1000);' +
-        '}, index * 100);' +
-        '});' +
-        '$(".easyui-datebox").each(function (index) {' +
-        'try {' +
-        '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
-        '} catch (e) {' +
-        '}' +
-        '});' +
-        '$(".easyui-datetimebox").each(function (index) {' +
-        'try {' +
-        '$(this).datetimebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd")+" 00:00:00");' +
-        '} catch (e) {' +
-        '}' +
-        '});' +
-        'let checkList=[];' +
-        '$("input[type=\\"checkbox\\"]").each(function (index) {' +
-        '                let name=$(this).attr("name");' +
-        '                if(name&&checkList.indexOf(name)<0){' +
-        '                    $(this).attr("checked","true");' +
-        'checkList.push(name);' +
-        '                }' +
-        '});' +
-        '$("input[type=\'radio\']").each(function (index) {' +
-        'let name=$(this).attr("name");' +
-        'if(name&&checkList.indexOf(name)<0){' +
-        '$(this).attr("checked","true");' +
-        'checkList.push(name);' +
-        '}' +
-        '});' +
-        '' +
-        '} catch (e) {' +
-        'console.log(e);' +
-        '}' +
-        'return maxNum;' +
-        '};' +
-        'var nextTime=setData();' +
-        'setTimeout(function () {' +
-        'setData();' +
-        '},nextTime*50);'+
-        'var nextTime=setData();' +
-        'setTimeout(function () {' +
-        'setData();' +
-        '},nextTime*150);';
-    frame.body.appendChild(script);
+    script1.onload=function(){
+        let script = frame.createElement("script");
+        script.type="text/javascript";
+        script.innerHTML = 'var setData=function () {' +
+            'try {' +
+            'var maxNum=1;' +
+            'var Rand = Math.random();' +
+            '$(".easyui-numberbox").each(function () {' +
+            'let value = $(this).numberbox("getValue");' +
+            'if (!value) {' +
+            '$(this).numberbox("setValue", 1);' +
+            '}' +
+            '});' +
+            'let idList=["contact_area","extension_contact"];' +
+            '$(".easyui-validatebox,.easyui-textbox").each(function () {' +
+            'if ($(this).is(":hidden")||idList.includes($(this).attr("id"))) {' +
+            '  return;' +
+            ' }' +
+            'let clazz = $(this).attr("class");' +
+            'if (clazz.indexOf("numberbox") > 0) {' +
+            'let value = $(this).numberbox("getValue");' +
+            'if (!value) {' +
+            '$(this).numberbox("setValue", 1);' +
+            '}' +
+            '} else if (clazz.indexOf("textbox") > 0) {'+
+            ' let value = $(this).textbox("getValue");' +
+            ' if (!value) {' +
+            ' $(this).textbox("setValue", "测试");}' +
+            ' } else {' +
+            'let value = $(this).val();' +
+            'if (!value) {' +
+            'let id = $(this).attr("id");' +
+            'if (id.indexOf("mobile") >= 0) {' +
+            'let mineId = Math.round(Rand * 1000000000);' +
+            '$(this).val("13" + mineId);' +
+            '} else if (id.indexOf("other_contact") >= 0) {' +
+            'let mineId = Math.round(Rand * 100000000);' +
+            '$(this).val(mineId);' +
+            '} else {' +
+            'var result = Mock.Random.csentence(3);' +
+            'if(id.indexOf("name")>=0){' +
+            '  result = Mock.Random.cname();' +
+            '  }else if(id.indexOf("code")>=0){' +
+            '  result = Mock.Random.word(3).toUpperCase();' +
+            ' }' +
+            '$(this).val(result);' +
+            '}' +
+            '}' +
+            '}' +
+            '});' +
+            '$(".easyui-queryCombobox,.easyui-mulQueryCombobox ").each(function (index) {' +
+            'let that = $(this);' +
+            'if(maxNum<index){' +
+            'maxNum=index;' +
+            '}' +
+            'setTimeout(function () {' +
+            'let value = that.queryCombobox("getValue");' +
+            'if (!value) {' +
+            'let combobox = that.combobox("getData");' +
+            'let valueField = that.combobox("options").valueField;' +
+            'if (combobox.length > 0) {' +
+            'that.combobox("setValue", combobox[0][valueField]);' +
+            '}' +
+            '}' +
+            '}, index * 300);' +
+            '});' +
+            '$(".easyui-combobox").each(function (index) {' +
+            'let that = $(this);' +
+            'if(maxNum<index){' +
+            'maxNum=index;' +
+            '}' +
+            'setTimeout(function () {' +
+            'let value = that.combobox("getValue");' +
+            'if (!value) {' +
+            'let combobox = that.combobox("getData");' +
+            'let valueField = that.combobox("options").valueField;' +
+            'if (combobox.length > 0) {' +
+            'that.combobox("setValue", combobox[0][valueField]);' +
+            '}' +
+            '}' +
+            'setTimeout(function () {' +
+            '' +
+            '                        let value = that.queryCombobox("getValue");' +
+            '                        if (!value) {' +
+            '                            let combobox = that.combobox("getData");' +
+            '                            let valueField = that.combobox("options").valueField;' +
+            '                            if (combobox.length > 0) {' +
+            '                                that.combobox("select", combobox[0][valueField]);' +
+            '                            }' +
+            '                        }' +
+            '                    },1000);' +
+            '}, index * 100);' +
+            '});' +
+            '$(".easyui-datebox").each(function (index) {' +
+            'try {' +
+            '$(this).datebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd"));' +
+            '} catch (e) {' +
+            '}' +
+            '});' +
+            '$(".easyui-datetimebox").each(function (index) {' +
+            'try {' +
+            '$(this).datetimebox("setValue", $$.dateFormat(new Date(), "yyyy-MM-dd")+" 00:00:00");' +
+            '} catch (e) {' +
+            '}' +
+            '});' +
+            'let checkList=[];' +
+            '$("input[type=\\"checkbox\\"]").each(function (index) {' +
+            '                let name=$(this).attr("name");' +
+            '                if(name&&checkList.indexOf(name)<0){' +
+            '                    $(this).attr("checked","true");' +
+            'checkList.push(name);' +
+            '                }' +
+            '});' +
+            '$("input[type=\'radio\']").each(function (index) {' +
+            'let name=$(this).attr("name");' +
+            'if(name&&checkList.indexOf(name)<0){' +
+            '$(this).attr("checked","true");' +
+            'checkList.push(name);' +
+            '}' +
+            '});' +
+            '' +
+            '} catch (e) {' +
+            'console.log(e);' +
+            '}' +
+            'return maxNum;' +
+            '};' +
+            'var nextTime=setData();' +
+            'setTimeout(function () {' +
+            'setData();' +
+            '},nextTime*50);'+
+            'var nextTime=setData();' +
+            'setTimeout(function () {' +
+            'setData();' +
+            '},nextTime*150);';
+        frame.body.appendChild(script);
+    }
+
+
+
 
 
 }
