@@ -118,12 +118,14 @@ function setFormData(frame){
             'var maxNum=1;' +
             'var Rand = Math.random();' +
             '$(".easyui-numberbox").each(function () {' +
+            'const options = $(this).numberbox("options");'+
+            ' if(options.readonly||options.disabled){return;}'+
             'let value = $(this).numberbox("getValue");' +
-            'if (!value) {' +
+            'if (!value||value==0) {' +
             '$(this).numberbox("setValue", 1);' +
             '}' +
             '});' +
-            'let idList=["contact_area","extension_contact"];' +
+            'let idList=["contact_area","extension_contact","seal_count"];' +
             '$(".easyui-validatebox,.easyui-textbox").each(function () {' +
             'if ($(this).is(":hidden")||idList.includes($(this).attr("id"))) {' +
             '  return;' +
@@ -192,7 +194,7 @@ function setFormData(frame){
             '}' +
             'setTimeout(function () {' +
             '' +
-            '                        let value = that.queryCombobox("getValue");' +
+            '                        let value = that.combobox("getValue");' +
             '                        if (!value) {' +
             '                            let combobox = that.combobox("getData");' +
             '                            let valueField = that.combobox("options").valueField;' +
