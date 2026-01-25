@@ -2,8 +2,8 @@
     "name":"自动填充密码器",
     "description":"这是一款登录页面，自动填充密码chrome浏览器插件，By Heavy",
     "version":"1.0.0",
-    "manifest_version":2,
-    "browser_action":{
+    "manifest_version":3,
+    "action":{
         "default_icon":"icons/icon.png",
         "default_title":"自动填充密码器",
         "default_popup": "popup.html"
@@ -16,20 +16,18 @@
         "128": "icons/icon.png"
     },
     "permissions": [
-        "http://*/", 
-        "bookmarks", 
-        "tabs", 
-        "background", 
-        "history" ,
-        "https://*/*",
+        "bookmarks",
+        "tabs",
+        "history",
         "activeTab",
-        "storage",
-      "commands",
-      "webRequest",
-      "webRequestBlocking"
+        "storage"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
     ],
     "background": {
-      "scripts": ["js/jquery.min.js","background/main.js","js/mock-min.js"]
+      "service_worker": "background/service-worker.js"
     },
     "content_scripts": [
         {
@@ -39,20 +37,17 @@
           ],
           "matches": [
             "http://*/*",
-            "https://*/*",
-            "file:///*"
+            "https://*/*"
           ],
           "run_at": "document_end"
-
         }
     ],
-  "commands": {
-    "myCommand": {
-      "suggested_key": {
-        "default": "Alt+I"
-      },
-      "description": "My custom command"
+    "commands": {
+      "myCommand": {
+        "suggested_key": {
+          "default": "Alt+I"
+        },
+        "description": "My custom command"
+      }
     }
-
-  }
 }
