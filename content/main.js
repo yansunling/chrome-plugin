@@ -302,7 +302,8 @@ setTimeout(function () {
                 $("#passcode").val("5308");
                 $("input[name='submit']").click();
             }
-    }else if(url=='https://tlwl.uat.tuolong56.com/portalv-page/#/homePage'||url=='https://kp.tuolong56.com/portalv-page/#/homePage'){
+    }else if(url=='https://tlwl.uat.tuolong56.com/portalv-page/#/homePage'||url=='https://kp.tuolong56.com/portalv-page/#/homePage'
+        ||url=='https://tlwl.uat.tuolong56.com/tlwlp-page/#/homePage'||url=='https://kp.tuolong56.com/tlwlp-page/#/homePage'){
         window.location.href="https://"+window.location.host;
     }else if(url=="https://tlwl.uat.tuolong56.com/tempLogin?token=backdoor"||url=='https://kp.tuolong56.com/tempLogin?token=backdoor'
                 ||url=='https://tlwl.uat.tuolong56.com/portalv-page/#/login_bk'){

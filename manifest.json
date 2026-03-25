@@ -1,14 +1,14 @@
 {
-    "name":"自动填充密码器",
-    "description":"这是一款登录页面，自动填充密码chrome浏览器插件，By Heavy",
-    "version":"1.0.0",
-    "manifest_version":3,
-    "action":{
-        "default_icon":"icons/icon.png",
-        "default_title":"自动填充密码器",
+    "name": "自动填充密码器",
+    "description": "这是一款登录页面，自动填充密码 Chrome 浏览器插件，By Heavy",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "action": {
+        "default_icon": "icons/icon.png",
+        "default_title": "自动填充密码器",
         "default_popup": "popup.html"
     },
-    "icons":{
+    "icons": {
         "16": "icons/icon.png",
         "19": "icons/icon.png",
         "38": "icons/icon.png",
@@ -27,27 +27,30 @@
         "https://*/*"
     ],
     "background": {
-      "service_worker": "background/service-worker.js"
+        "service_worker": "background/main.js"
     },
     "content_scripts": [
         {
-          "all_frames": true,
-          "js": [
-           "js/jquery.min.js", "content/main.js","js/crypto-js.js","js/mock-min.js"
-          ],
-          "matches": [
-            "http://*/*",
-            "https://*/*"
-          ],
-          "run_at": "document_end"
+            "all_frames": true,
+            "js": [
+                "js/jquery.min.js",
+                "content/main.js",
+                "js/crypto-js.js",
+                "js/mock-min.js"
+            ],
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "run_at": "document_end"
         }
     ],
     "commands": {
-      "myCommand": {
-        "suggested_key": {
-          "default": "Alt+I"
-        },
-        "description": "My custom command"
-      }
+        "myCommand": {
+            "suggested_key": {
+                "default": "Alt+I"
+            },
+            "description": "My custom command"
+        }
     }
 }
